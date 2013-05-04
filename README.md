@@ -1,5 +1,6 @@
 ##LuckyPlayer is a super light jQuery slideshow and lightbox.
 
+
 Implementation requires an unordered list of images (the thumbnails) inside an 
 anchor tag that links to the full size image.
 ```html
@@ -8,7 +9,7 @@ anchor tag that links to the full size image.
       <a href="http://path.to/full/size.jpg">
          <img src="http://path.to/thumbnail.jpg"/>
       </a>
-    </li>
+   </li>
 </ul>
 ```
 
