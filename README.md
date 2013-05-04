@@ -1,8 +1,7 @@
-LuckyPlayer is a super light jQuery slideshow and lightbox.
+##LuckyPlayer is a super light jQuery slideshow and lightbox.
 
 Implementation requires an unordered list of images (the thumbnails) inside an 
 anchor tag that links to the full size image.
-   
 ```html
 <ul class="luckyplayer">
    <li>
@@ -29,4 +28,4 @@ $("ul.luckyplayer").luckyplayer({
 });
 ```
 
-Remember to load jQuery before this script.
+That's it, just remember to load jQuery before this script.
