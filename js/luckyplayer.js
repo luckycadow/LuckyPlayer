@@ -4,9 +4,11 @@ $.fn.luckyplayer = function(o) {
 	
     o = $.extend({
 
-        auto: 6000,		// animation interval
-        loop: true,		// infinite loop
-	images: '/assets/images/luckyplayer/'
+        pauseLength: 6000,		// animation interval when playing
+        loop: true,		// loop when end of image list is reached
+		imageLocation: '/Luckyplayer/js/', // location of images on server
+		bgOpacity: 0.95, // opacity of 'shadow'
+		autoPlay: false	// start slideshow when plugin is initialized
 
     }, o || {});
 
@@ -14,7 +16,7 @@ $.fn.luckyplayer = function(o) {
 	$('body').append(
 		'<div id="lp_frame">'+
 			'<img id="lp_image">'+
-			'<img id="lp_spinner" src="'+o.images+'loader.gif">'+
+			'<img id="lp_spinner" src="'+o.imageLocation+'loader.gif">'+
 		'</div>'+
 		'<div id="lp_toolbar">'+
 			'<div id="lp_play"></div>'+
@@ -36,7 +38,7 @@ $.fn.luckyplayer = function(o) {
 		display: "none",
 		width: "100%",
 		height: "100%",
-		opacity: 0.95,
+		opacity: o.bgOpacity,
 		backgroundColor: "black"
 	});
 	
@@ -100,10 +102,10 @@ $.fn.luckyplayer = function(o) {
 		backgroundRepeat: "no-repeat",
 		backgroundPosition: "center"
 	});
-	var icon = toolbar.find("#lp_play").css("backgroundImage", 'url('+o.images+'play.png)');
-	toolbar.find("#lp_next").css("backgroundImage", 'url('+o.images+'next.png)');
-	toolbar.find("#lp_prev").css("backgroundImage", 'url('+o.images+'prev.png)');
-	toolbar.find("#lp_close").css("backgroundImage", 'url('+o.images+'close.png)');
+	var icon = toolbar.find("#lp_play").css("backgroundImage", 'url('+o.imageLocation+'play.png)');
+	toolbar.find("#lp_next").css("backgroundImage", 'url('+o.imageLocation+'next.png)');
+	toolbar.find("#lp_prev").css("backgroundImage", 'url('+o.imageLocation+'prev.png)');
+	toolbar.find("#lp_close").css("backgroundImage", 'url('+o.imageLocation+'close.png)');
 
 	// Image variables
 	var thumbs = $(this).find("li > a"),	// Set of thumbs/links
@@ -300,7 +302,7 @@ $.fn.luckyplayer = function(o) {
 		if (o.player) {
 			
 			// Switch icon to play
-			icon.css("backgroundImage", 'url('+o.images+'play.png)');
+			icon.css("backgroundImage", 'url('+o.imageLocation+'play.png)');
 			
 			// Clear the timer and set variable to false
 			clearInterval(o.player);
@@ -311,12 +313,12 @@ $.fn.luckyplayer = function(o) {
 		else {
 			
 			// Switch icon to pause
-			icon.css("backgroundImage",'url('+o.images+'pause.png)');
+			icon.css("backgroundImage",'url('+o.imageLocation+'pause.png)');
 			
 			// Set the timer to advance images
 			o.player = setInterval(function(){
 				next();
-			}, o.auto)
+			}, o.pauseLength)
 			
 		}
 		
@@ -331,7 +333,7 @@ $.fn.luckyplayer = function(o) {
 		// Clear slideshow timer and reset controls
 		clearTimeout(o.player);
 		o.player = false;
-		icon.css("backgroundImage", 'url('+o.images+'play.png)');
+		icon.css("backgroundImage", 'url('+o.imageLocation+'play.png)');
 		
 		// Hide the lightbox and controls
 		toolbar.hide();
@@ -344,6 +346,24 @@ $.fn.luckyplayer = function(o) {
 		return false;
 		
 	});
+
+	// Start autoPlay - don't pop up toolbar, start at first image
+	if (o.autoPlay === true) {
+		
+		// Show the shadow and frame
+		shadow.show();
+		frame.show();
+		
+		// Show first image
+		show(cur);
+		
+		// Swap button icon and play
+		icon.css("backgroundImage",'url('+o.imageeLocation+'pause.png)');
+		o.player = setInterval(function(){
+			next();
+		}, o.pauseLength)
+		
+	}
     
 };
 
