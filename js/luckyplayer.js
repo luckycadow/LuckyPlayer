@@ -8,7 +8,8 @@ $.fn.luckyplayer = function(o) {
 	        loop: true,		// loop when end of image list is reached
 		imageLocation: '/Luckyplayer/js/', // location of images on server
 		bgOpacity: 0.95, // opacity of 'shadow'
-		autoPlay: false	// start slideshow when plugin is initialized
+		autoPlay: false,	// start slideshow when plugin is initialized
+		transitionSpeed: 0
 
     	}, o || {});
 
@@ -87,7 +88,7 @@ $.fn.luckyplayer = function(o) {
 		marginLeft: "-25px",
 		marginTop: "-25px",
 		zIndex: 1103,
-		opacity: 0.8
+		opacity: 0.5
 	});
 	
 	// Styling for the img tag used for caching
@@ -112,6 +113,7 @@ $.fn.luckyplayer = function(o) {
 	var thumbs = $(this).find("li > a"),	// Set of thumbs/links
 		cur = 0,	// Index of current image
 		count = thumbs.size()-1;	// images - 1 to match indeces
+	o.transitionSpeed = o.transitionSpeed > 0 ? o.transitionSpeed / 2 : 0;
 
 	// Global timer variables
 	o.player = false;	// Slideshow timer
@@ -126,7 +128,7 @@ $.fn.luckyplayer = function(o) {
 	function show(i) {
 
 		// Hide the image 
-		image.fadeOut(200).after(function () {
+		image.fadeOut(o.transitionSpeed, function () {
 			
 			// If the slideshow is running, preload the next image
 			if (o.player) {
@@ -136,7 +138,7 @@ $.fn.luckyplayer = function(o) {
 			// Load the image
 			image.attr("src", thumbs[i].href);
 			
-		})
+		});
 
 	}
 	
@@ -226,7 +228,7 @@ $.fn.luckyplayer = function(o) {
 		position();
 		
 		// Show the image
-		image.fadeIn(300);
+		image.fadeIn(o.transitionSpeed);
 		
 	});
 
