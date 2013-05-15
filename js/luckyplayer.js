@@ -9,7 +9,8 @@ $.fn.luckyplayer = function(o) {
 		imageLocation: '/Luckyplayer/js/', // location of images on server
 		bgOpacity: 0.95, // opacity of 'shadow'
 		autoPlay: false,	// start slideshow when plugin is initialized
-		transitionSpeed: 0
+		transitionSpeed: 0,
+		showSpinner: true
 
     	}, o || {});
 
@@ -17,7 +18,7 @@ $.fn.luckyplayer = function(o) {
 	$('body').append(
 		'<div id="lp_frame">'+
 			'<img id="lp_image">'+
-			'<img id="lp_spinner" src="'+o.imageLocation+'loader.gif">'+
+			(o.showSpinner ? '<img id="lp_spinner" src="'+o.imageLocation+'loader.gif">' : '')+
 		'</div>'+
 		'<div id="lp_toolbar">'+
 			'<div id="lp_play"></div>'+
@@ -80,16 +81,18 @@ $.fn.luckyplayer = function(o) {
 		zIndex: 1104
 	});
 	
-	// Styling for the loading animation
-	$("#lp_spinner").css({
-		position: "absolute",
-		left: "50%",
-		top: "50%",
-		marginLeft: "-25px",
-		marginTop: "-25px",
-		zIndex: 1103,
-		opacity: 0.5
-	});
+	if (o.showSpinner) {
+		// Styling for the loading animation
+		$("#lp_spinner").css({
+			position: "absolute",
+			left: "50%",
+			top: "50%",
+			marginLeft: "-25px",
+			marginTop: "-25px",
+			zIndex: 1103,
+			opacity: 0.5
+		});
+	}
 	
 	// Styling for the img tag used for caching
 	var preload = $("#lp_preload").css({
