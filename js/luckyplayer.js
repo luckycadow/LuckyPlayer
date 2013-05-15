@@ -2,15 +2,15 @@
 	
 $.fn.luckyplayer = function(o) {
 	
-    o = $.extend({
-
-        pauseLength: 6000,		// animation interval when playing
-        loop: true,		// loop when end of image list is reached
+    	o = $.extend({
+	
+	        pauseLength: 6000,		// animation interval when playing
+	        loop: true,		// loop when end of image list is reached
 		imageLocation: '/Luckyplayer/js/', // location of images on server
 		bgOpacity: 0.95, // opacity of 'shadow'
 		autoPlay: false	// start slideshow when plugin is initialized
 
-    }, o || {});
+    	}, o || {});
 
 	// Append the html
 	$('body').append(
@@ -358,7 +358,7 @@ $.fn.luckyplayer = function(o) {
 		show(cur);
 		
 		// Swap button icon and play
-		icon.css("backgroundImage",'url('+o.imageeLocation+'pause.png)');
+		icon.css("backgroundImage",'url('+o.imageLocation+'pause.png)');
 		o.player = setInterval(function(){
 			next();
 		}, o.pauseLength)
