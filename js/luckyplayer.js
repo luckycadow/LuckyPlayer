@@ -126,15 +126,17 @@ $.fn.luckyplayer = function(o) {
 	function show(i) {
 
 		// Hide the image 
-		image.fadeOut(200);
+		image.fadeOut(200).after(function () {
+			
+			// If the slideshow is running, preload the next image
+			if (o.player) {
+				preload.attr("src", thumbs[i+1].href);
+			}
 		
-		// If the slideshow is running, preload the next image
-		if (o.player) {
-			preload.attr("src", thumbs[i+1].href);
-		}
-		
-		// Load the image
-		image.attr("src", thumbs[i].href);
+			// Load the image
+			image.attr("src", thumbs[i].href);
+			
+		})
 
 	}
 	
