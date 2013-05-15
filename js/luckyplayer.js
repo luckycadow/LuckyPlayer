@@ -87,7 +87,7 @@ $.fn.luckyplayer = function(o) {
 		marginLeft: "-25px",
 		marginTop: "-25px",
 		zIndex: 1103,
-		opacity: 0.9
+		opacity: 0.8
 	});
 	
 	// Styling for the img tag used for caching
@@ -126,7 +126,7 @@ $.fn.luckyplayer = function(o) {
 	function show(i) {
 
 		// Hide the image 
-		image.hide(200);
+		image.fadeOut(200);
 		
 		// If the slideshow is running, preload the next image
 		if (o.player) {
