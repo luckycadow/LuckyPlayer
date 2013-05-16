@@ -355,12 +355,13 @@ $.fn.luckyplayer = function(o) {
 		
 	});
 
-	// Start autoPlay - don't pop up toolbar, start at first image
+	// Start autoPlay
 	if (o.autoPlay === true) {
 		
 		// Show the shadow and frame
 		shadow.show();
 		frame.show();
+		toolbar.show();
 		
 		// Show first image
 		show(cur);
