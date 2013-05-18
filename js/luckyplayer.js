@@ -328,6 +328,9 @@ $.fn.luckyplayer = function(o) {
 				next();
 			}, o.pauseLength)
 			
+			// Move to next image
+			next();
+			
 		}
 		
 	});
